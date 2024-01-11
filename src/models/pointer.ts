@@ -14,11 +14,15 @@ const pointerSchema = new mongoose.Schema({
         type: Number,
         required: true,
     },
+    milestone: {
+        type: String,
+         required: false,
+    },
     createdAt: {
         type: Date,
         default: Date.now
     }
 });
-// Create the User model
+// Create pointer model
 const pointer = mongoose.model("Pointer", pointerSchema);
 export default pointer;
