@@ -7,7 +7,7 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 
 const PORT: number = parseInt(process.env.PORT || '3000');
-const MONGO_URL: string = process.env.MONGO_URL || 'mongodb://0.0.0.0:27017/lesson_points_tracker';
+const MONGO_URL: string = process.env.MONGO_URL||"";
 
 export const app = express();
 
