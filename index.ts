@@ -1,5 +1,4 @@
 import express from "express";
-// import bcrypt from "bcryptjs";
 import mongoose from "mongoose";
 import cors from "cors"
 import router from "./src/modules";
@@ -7,7 +6,7 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 
 const PORT: number = parseInt(process.env.PORT || '3000');
-const MONGO_URL: string = process.env.MONGO_URL||"";
+const MONGO_URL: string = process.env.MONGO_URL|| "";
 
 export const app = express();
 
