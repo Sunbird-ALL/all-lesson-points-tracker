@@ -9,7 +9,6 @@ export const app = express();
 
 const PORT: number = parseInt(process.env.PORT || '3009');
 const dataBaseType: string = process.env.DATABASE_TYPE || ""
-console.log("dataBaseType---", dataBaseType.toLocaleLowerCase());
 
 
 if (dataBaseType.toLowerCase() === "mysql") {
