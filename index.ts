@@ -10,6 +10,9 @@ export const app = express();
 const PORT: number = parseInt(process.env.PORT || '3009');
 const dataBaseType: string = process.env.DATABASE_TYPE || ""
 
+// parsing the request data
+app.use(express.json());
+app.use(cors());
 
 if (dataBaseType.toLowerCase() === "mysql") {
   sqlDatabaseConnection()
@@ -18,10 +21,6 @@ if (dataBaseType.toLowerCase() === "mysql") {
   mongodbConnection();
   app.use("/api", mongoDbRouter);
 }
-
-// parsing the request data
-app.use(express.json());
-app.use(cors());
 
 // App testing
 app.get('/ping', (req, res) => {
