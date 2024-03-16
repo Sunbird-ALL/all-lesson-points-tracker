@@ -1,15 +1,16 @@
-import { NextFunction, Request, Response } from "express";
-import HttpException from "../../common/db/http.Exception/http.Exception";
-import HttpResponse from "../../common/db/http.Response/http.Response";
-import lessonServices from "./lesson.services";
+
+import { Request, Response } from 'express';
+import HttpException from '../../../common/http.Exception/http.Exception';
+import HttpResponse from '../../../common/http.Response/http.Response';
+import lessonSqlService from './lessonService';
 
 
-class lessonController {
-   
+class lessonSqlController {
+    // Sql add lesson
     static async addLesson(request: Request, response: Response, next: CallableFunction) {
         try {
             const lesson = request.body;
-            lessonServices.addLesson(lesson, (err: any, result: any) => {
+            lessonSqlService.addLessonSql(lesson, (err: any, result: any) => {
                 if (err) {
                     next(new HttpException(400, err));
                 } else {
@@ -20,15 +21,15 @@ class lessonController {
         catch (err) {
             next(new HttpException(400, "Something went wrong"));
         }
-    };
+    }
 
-    static async getLessonProgress(request: Request, response: Response, next: NextFunction) {
+    // sql get Lesson
+    static async getLessonProgress(request: Request, response: Response, next: CallableFunction) {
         try {
             const userID = request.params.userId;
             const language = request.query.language;
-            console.log("userID----", userID);
-           
-            lessonServices.getLessonProgress(userID,language,(err: any, result: any) => {
+            
+            lessonSqlService.getLessonProgress(userID, language, (err: any, result: any) => {
                 if (err) {
                     next(new HttpException(400, err));
                 } else {
@@ -40,5 +41,6 @@ class lessonController {
             next(new HttpException(400, "Something went wrong"));
         }
     }
+
 }
-export default lessonController;
+export default lessonSqlController;

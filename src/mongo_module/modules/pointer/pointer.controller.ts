@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
-import HttpException from "../../common/db/http.Exception/http.Exception";
-import HttpResponse from "../../common/db/http.Response/http.Response";
 import pointerServices from "./pointer.services";
+import HttpException from "../../../common/http.Exception/http.Exception";
+import HttpResponse from "../../../common/http.Response/http.Response";
 
 
 class pointerController {

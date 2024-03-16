@@ -30,3 +30,5 @@ const pointerSchema = new mongoose.Schema({
 // Create pointer model
 const pointer = mongoose.model("Pointer", pointerSchema);
 export default pointer;
+
+

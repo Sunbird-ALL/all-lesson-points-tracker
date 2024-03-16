@@ -1,42 +1,36 @@
 import express from "express";
-import mongoose from "mongoose";
 import cors from "cors"
-import router from "./src/modules";
 import * as dotenv from 'dotenv';
 dotenv.config();
+import sqlRouter, { sqlDatabaseConnection } from "./src/sql_module";
 
-const PORT: number = parseInt(process.env.PORT || '3000');
-const MONGO_URL: string = process.env.MONGO_URL|| "";
-
+import mongoDbRouter, { mongodbConnection } from "./src/mongo_module/modules";
 export const app = express();
+
+const PORT: number = parseInt(process.env.PORT || '3009');
+const dataBaseType: string = process.env.DATABASE_TYPE || ""
+
+
+if (dataBaseType.toLowerCase() === "mysql") {
+  sqlDatabaseConnection()
+  app.use("/api", sqlRouter);
+} else {
+  mongodbConnection();
+  app.use("/api", mongoDbRouter);
+}
 
 // parsing the request data
 app.use(express.json());
 app.use(cors());
 
+// App testing
+app.get('/ping', (req, res) => {
+  res.status(200).json({
+    status: true,
+    message: "App is working",
+  })
+});
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
-
-
-// dataBase connection
-mongoose.set('strictQuery', false);
-mongoose.connect(MONGO_URL).then(()=>{
-  console.log("\n*************MONGODB connected**************\n");
-}).catch(error =>{
-  console.log("unable to connect with database:", error);
-});
- 
-// App testing
-app.get('/ping', (req,res)=>{
-  res.status(200).json({
-      status: true,
-      message : "App is working",
-  })
-});
-
-// router 
-app.use("/api", router);
-
-

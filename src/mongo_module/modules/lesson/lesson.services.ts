@@ -1,4 +1,5 @@
-import CrudOperations from "../../common/db/crud";
+
+import CrudOperations from "../../../common/crud";
 import Lesson from "../../models/lesson";
 
 
